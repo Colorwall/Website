@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorWall - Amazing Free Wallpaper Engine</title>
+    <meta name="description"
+        content="A Free Wallpaper Engine Alternative Built in Rust. Designed for Performance, Optimization Enthusiasts, and Everyday Users.">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet">
+    </noscript>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-nav.css">
+    <style>
+        /* Reduced Motion & Performance Optimization */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .hero-video {
+                display: none;
+            }
+
+            .hero {
+                background-color: var(--bg-color);
+            }
+        }
+
+        .paused-animation,
+        .paused-animation *,
+        .paused-animation::before,
+        .paused-animation::after,
+        .paused-animation *::before,
+        .paused-animation *::after {
+            animation-play-state: paused !important;
+        }
+    </style>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+
+    <!-- Preload LCP Image -->
+    <link rel="preload" as="image" href="assets/colorwallsoftware.png" fetchpriority="high">
+</head>
+
+<body>
+    <div class="background-glob"></div>
+    <div class="background-grid"></div>
+
+    <nav class="navbar" aria-label="Main Navigation">
+        <div class="container nav-container">
+            <!-- Left: Logo -->
+            <a href="#" class="logo">
+                <img src="assets/colorwalltext.png" alt="ColorWall Logo" class="logo-image">
+            </a>
+
+            <!-- Mobile Menu Button -->
+            <button class="hamburger-menu" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Center: Links -->
+            <div class="nav-links">
+                <a href="https://github.com/orgs/Colorwall/discussions">Discussions</a>
+                <a href="#download">Download</a>
+                <a href="https://ko-fi.com/colorwall">Support Us</a>
+            </div>
+
+            <!-- Right: Social Icons -->
+            <div class="nav-socials">
+                <a href="https://github.com/Colorwall/Colorwall" target="_blank" aria-label="GitHub"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="https://discord.gg/xYahN9wyju" target="_blank" aria-label="Discord"><i
+                        class="fa-brands fa-discord"></i></a>
+                <a href="#" target="_blank" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <main>
+
+        <header class="hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="assets/Neon_Skyline.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="container hero-content">
+                <div class="hero-text">
+
+                    <div class="hero-branding">
+                        <img src="assets/colorwalltext.png" alt="ColorWall" class="hero-logo-text">
+                    </div>
+
+                    <p class="hero-subtitle">
+                        Dynamic wallpapers that don't drain your system. <br>
+                        Live wallpapers with true 4k support and very low performance impact.
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#download" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-download"></i> Download Now
+                        </a>
+
+                        <a href="https://github.com/Colorwall/ColorWall" target="_blank"
+                            class="btn btn-secondary btn-lg">
+                            <i class="fa-brands fa-github"></i> Source Code
+                        </a>
+
+                    </div>
+                    <p class="hero-download-note">Download the latest version for your desired operating system from
+                        releases.</p>
+                    <br>
+                    <!-- Video Mockup Moved Here -->
+                    <div class="hero-visual">
+                        <div class="animated-border-box">
+                            <img src="assets/colorwallsoftware.png" alt="ColorWall Interface" class="app-mockup"
+                                style="width: 100%; height: auto;" fetchpriority="high" loading="eager">
+                        </div>
+                        <div class="glow-effect"></div>
+                    </div>
+
+                    <div class="tech-stack">
+                        <span><i class="fa-brands fa-rust"></i> Rust Core</span>
+                        <span><i class="fa-solid fa-bolt"></i> GPU Accelerated</span>
+                        <span><i class="fa-solid fa-feather"></i> Lightweight</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="features" class="features-section" aria-labelledby="features-title">
+            <div class="container">
+                <h2 id="features-title" class="section-title">Why <span class="highlight">ColorWall?</span></h2>
+                <p class="section-subtitle">Designed for performance enthusiasts and everyday users.</p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3>4K Video Support</h3>
+                        <p>Crystal clear 4K 60fps wallpapers with native Windows Media Foundation decoding.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h3>Insane Performance</h3>
+                        <p>Uses ~0.5% CPU and 3-8% GPU. Pauses automatically when full-screen apps or games run.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                        </div>
+                        <h3>Smart Loading</h3>
+                        <p>Thumbnails load instantly. 4K videos download only on confirmation to save bandwidth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+                        <h3>Integrated Store</h3>
+                        <p>Access thousands of wallpapers from multiple sources without leaving the app. 100% Free.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h3>Multi-Monitor Support</h3>
+                        <p>Seamlessly span wallpapers across screens or set different visuals for each display.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-html5"></i>
+                        </div>
+                        <h3>Web Wallpapers</h3>
+                        <p>Run interactive web-based wallpapers using the lightweight, integrated WebView.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="comparison-section" aria-labelledby="comparison-title">
+            <div class="container">
+                <h2 id="comparison-title" class="section-title">Performance <span class="highlight">Benchmark</span>
+                </h2>
+                <p class="section-subtitle">Tested on Intel i3 laptop with integrated graphics.</p>
+                <div class="hero-cta">
+                    <a href="#download" class="btn btn-primary btn-lg">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View detailed benchmark
+                    </a>
+                </div>
+                <div class="table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>App</th>
+                                <th>CPU Usage</th>
+                                <th>GPU Usage</th>
+                                <th>Memory</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="highlight-row">
+                                <td><img src="assets/colorwall.png" alt="ColorWall" class="app-logo"> ColorWall</td>
+                                <td>0.7%</td>
+                                <td>11.5%</td>
+                                <td>316 MB</td>
+                                <td class="free">Free</td>
+                            </tr>
+                            <tr>
+                                <td><img src="assets/lively.webp" alt="Lively Wallpaper" class="app-logo"> Lively
+                                    Wallpaper
+                                </td>
+                                <td>1.9%</td>
+                                <td>74%</td>
+                                <td>294 MB</td>
+                                <td>Free</td>
+                            </tr>
+                            <tr>
+                                <td><img src="assets/wallpaperengine.png" alt="Wallpaper Engine" class="app-logo">
+                                    Wallpaper
+                                    Engine</td>
+                                <td>0.9%</td>
+                                <td>61.8%</td>
+                                <td>322 MB</td>
+                                <td>$4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="download" class="download-section" aria-labelledby="download-title">
+            <div class="container">
+                <h2 id="download-title" class="section-title">Get <span class="highlight">ColorWall</span></h2>
+                <p class="section-subtitle">Start customizing your desktop today.</p>
+
+                <div class="download-grid">
+                    <div class="download-card windows">
+                        <div class="os-icon"><i class="fa-brands fa-windows"></i></div>
+                        <h3>Windows</h3>
+                        <p>Windows 10/11 (64-bit)</p>
+                        <a href="#" class="btn btn-primary btn-block"><i class="fa-solid fa-download"></i> Download
+                            .exe</a>
+                        <a href="#about" class="btn btn-secondary btn-block" style="margin-top: 10px;">
+                            <img src="assets/microsoftstore.svg" alt="Microsoft Store"
+                                style="width: 20px; height: 20px;">
+                            Download from Microsoft Store
+                        </a>
+
+                        <p class="note">SmartScreen may appear. Select "Run anyway".</p>
+                    </div>
+                    <div class="download-card linux">
+                        <div class="os-icon"><i class="fa-brands fa-linux"></i></div>
+                        <h3>Linux</h3>
+                        <p>Coming Soon</p>
+                        <button class="btn btn-secondary btn-block" disabled>Not Available</button>
+                    </div>
+                    <div class="download-card mac">
+                        <div class="os-icon"><i class="fa-brands fa-apple"></i></div>
+                        <h3>macOS</h3>
+                        <p>Not Supported Yet</p>
+                        <button class="btn btn-secondary btn-block" disabled>Not Available</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about" class="opensource-section" aria-labelledby="about-title">
+            <div class="container opensource-container">
+                <!-- Left: Visual Mockup -->
+                <div class="opensource-visual">
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <div class="repo-title">ColorWall / ColorWall</div>
+                        </div>
+                        <div class="repo-preview">
+                            <div class="code-snippet-container">
+                                <div class="code-line"><span class="k">struct</span> <span class="t">ColorWall</span> {
+                                </div>
+                                <div class="code-line indent"><span class="p">core:</span> <span class="t">Rust</span>,
+                                </div>
+                                <div class="code-line indent"><span class="p">gpu_accel:</span> <span
+                                        class="b">true</span>,
+                                </div>
+                                <div class="code-line indent"><span class="p">license:</span> <span
+                                        class="s">"Closed-Source"</span>,</div>
+                                <div class="code-line">}</div>
+                                <div class="code-line"></div>
+                                <div class="code-line"><span class="k">impl</span> <span class="t">Performance</span>
+                                    <span class="k">for</span> <span class="t">App</span> {
+                                </div>
+                                <div class="code-line indent"><span class="k">fn</span> <span
+                                        class="f">optimize</span>(&<span class="v">self</span>) {</div>
+                                <div class="code-line indent-2"><span class="c">// Zero resource usage</span></div>
+                                <div class="code-line indent-2"><span class="v">self</span>.<span
+                                        class="f">render_native</span>();</div>
+                                <div class="code-line indent">}</div>
+                                <div class="code-line">}</div>
+                            </div>
+                            <div class="repo-overlay">
+                                <div class="starred-badge">
+                                    <i class="fa-solid fa-star"></i> Starred <span class="divider">|</span> 0.0k
+                                </div>
+                            </div>
+                        </div>
+                        <div class="repo-footer">
+                            <div class="repo-lang"><span class="lang-dot"></span> Rust</div>
+                            <div class="repo-license"><i class="fa-solid fa-lock"></i> Closed Source</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Text Content -->
+                <div class="opensource-text">
+                    <h2 id="about-title">Planned <br> <span class="highlight-blue">Open Source</span></h2>
+                    <p>
+                        ColorWall is currently closed-source to protect our unique optimization logic in the age of AI.
+                        We are self-funding the Microsoft Store developer license and distribution costs.
+                        Once our infrastructure is secured, we plan to open-source the project for the community.
+                    </p>
+
+
+
+
+                    <div class="support-extended">
+                        <p>If you would like to support the project and help accelerate open-sourcing efforts, you can
+                            contribute here:</p>
+                        <a href="https://ko-fi.com/colorwall" target="_blank" class="kofi-link">
+                            <img src="assets/cup-border.png" alt="Ko-fi" style="width: 20px; height: auto;">
+                            Support on Ko-fi
+                        </a>
+                        <p class="support-note">Community support directly helps with licensing, signing certificates,
+                            and
+                            long-term development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials-section" aria-labelledby="testimonials-title">
+            <div class="container">
+                <div class="testimonials-grid">
+                    <!-- Left Column: Text -->
+                    <div class="testimonials-text">
+                        <h2 id="testimonials-title">What does our <span class="highlight">community</span> think?</h2>
+                        <p>
+                            Our community is passionate and reviews us with a significant amount of positive feedback.
+                            We take great pride in our high rating, which reflects our commitment to improving
+                            ColorWall.
+                        </p>
+                        <div class="trust-score">
+                            <div class="score-box">
+                                <div class="stars">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                                <span>Many Positive reviews</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visual Composition -->
+                    <div class="testimonials-visual">
+                        <!-- Back Card (Review) -->
+                        <div class="review-card-bg">
+                            <div class="review-header">
+                                <div class="reviewer-avatar">TS</div>
+                                <div class="reviewer-info">
+                                    <strong>Tuhin Sarkar</strong>
+                                    <span>4 days ago</span>
+                                </div>
+                            </div>
+                            <div class="review-stars-small">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                    class="fa-solid fa-star"></i>
+                            </div>
+                            <h5>Honest review</h5>
+                            <p>ColorWall made my desktop so much better. I used to run Lively and it was so heavy.
+                                <br>
+                                ColorWall is super lightweight!
+                            </p>
+                        </div>
+
+                        <!-- Front Card (Brand) -->
+                        <div class="trust-card-fg">
+                            <div class="trust-brand-logo">
+                                <!-- Using the existing logo asset -->
+                                <img src="assets/colorwall.png" alt="ColorWall Logo">
+                            </div>
+                            <div class="trust-info">
+                                <h3>Colorwall</h3>
+                                <span>Reviews - Excellent</span>
+                                <div class="trust-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                        class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="verified-badge">
+                                    <i class="fa-solid fa-check-circle"></i> HIGHLY RATED PROJECT
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Star -->
+                        <div class="floating-discord">
+                            <i class="fa-brands fa-discord"></i>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq-section" aria-labelledby="faq-title">
+            <div class="container">
+                <div class="faq-header">
+                    <span class="faq-label">FAQ</span>
+                    <h2 id="faq-title" class="section-title">Frequently asked questions</h2>
+                </div>
+
+                <div class="faq-accordion">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Is ColorWall completely free?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>The website version of ColorWall remains completely free. However, future releases on
+                                platforms like the Microsoft Store, Epic Games Store, and Steam will be paid versions to
+                                help support the project's development.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Does it affect gaming performance?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>ColorWall automatically pauses when you run full-screen applications or games, ensuring
+                                zero
+                                impact on your gaming performance.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Can I create my own wallpapers?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely! ColorWall supports custom video wallpapers and interactive web-based
+                                wallpapers.
+                                You can easily import your own files.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span>Which Windows versions are supported?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Currently, ColorWall supports Windows 10 and Windows 11 (64-bit versions). Support for
+                                other
+                                operating systems is planned for the future.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        <section class="community-section" aria-labelledby="community-title">
+            <div class="container community-content">
+                <span class="community-label">JOIN OUR COMMUNITY</span>
+                <h2 id="community-title">Be part of the <span class="highlight">Colorwall</span> community</h2>
+                <p class="community-desc">
+                    Join our thriving community of enthusiasts. <br>
+                    Connect, share, and stay updated.
+                </p>
+                <div class="community-actions">
+                    <a href="https://discord.gg/xYahN9wyju" target="_blank" class="btn btn-primary btn-discord">
+                        <i class="fa-brands fa-discord"></i> Join Discord
+                    </a>
+                    <a href="#" target="_blank" class="btn btn-secondary">
+                        <i class="fa-brands fa-x-twitter"></i> Follow us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <!-- Column 1: Brand & Identity -->
+            <div class="footer-brand">
+                <div class="hero-branding">
+                    <img src="assets/colorwalltext.png" alt="ColorWall" width="300">
+                </div>
+                <p class="brand-desc">The next-generation wallpaper engine built for performance and aesthetics.</p>
+
+            </div>
+
+            <!-- Column 2: Product & Downloads -->
+            <div class="footer-column">
+                <h4>Get ColorWall</h4>
+                <div class="footer-download-area">
+                    <a href="#download" class="btn btn-primary btn-sm-footer">
+                        <i class="fa-brands fa-windows"></i> Download
+                    </a>
+                    <p class="os-note">v1.0.0 • Windows 10/11</p>
+                </div>
+                <div class="footer-contribute-area">
+                    <a href="https://github.com/Colorwall/ColorWall" target="_blank" class="link-with-icon">
+                        <i class="fa-solid fa-code-branch"></i> Contribute on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- Column 3: Resources -->
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul class="footer-links-list">
+                    <li><a href="#features">Features Overview</a></li>
+                    <li><a href="#comparison">Benchmarks</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Connect -->
+            <div class="footer-column">
+                <h4>Connect</h4>
+                <div class="footer-contact">
+                    <a href="mailto:help.colorwall@gmail.com" class="email-link">
+                        <i class="fa-solid fa-envelope"></i> help.colorwall@gmail.com
+                    </a>
+                </div>
+                <div class="footer-social-grid">
+                    <a href="https://github.com/Colorwall/Colorwall" target="_blank" aria-label="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://discord.gg/xYahN9wyju" target="_blank" aria-label="Discord"><i
+                            class="fa-brands fa-discord"></i></a>
+                    <a href="#" target="_blank" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container bottom-content">
+                <p>&copy; 2026 ColorWall. All rights reserved.</p>
+                <div class="made-with">
+                    <span>Made with <i class="fa-solid fa-heart" style="color: #ff4757;"></i> and Rust</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

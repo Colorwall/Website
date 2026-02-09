@@ -1,0 +1,32 @@
+/* Reduced Motion & Performance Optimization */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-video {
+        display: none;
+        /* Or just pause it generally via JS, but hiding usually preferred or static image */
+    }
+
+    /* Maybe show a static background instead of video if hidden */
+    .hero {
+        background-color: var(--bg-color);
+    }
+}
+
+/* Helper to pause animations via JS recursively */
+.paused-animation,
+.paused-animation *,
+.paused-animation::before,
+.paused-animation::after,
+.paused-animation *::before,
+.paused-animation *::after {
+    animation-play-state: paused !important;
+}
